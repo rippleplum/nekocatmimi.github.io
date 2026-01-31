@@ -181,29 +181,44 @@
             </div>
 
             <!-- Image Placeholders (Mimicking Fig 1-5 in PDF) -->
-            <div class="bg-white rounded-xl p-6 paper-shadow border border-neko-paper">
-                <h4 class="font-bold text-lg mb-4">[附录] 影像资料存档 (图1-图5)</h4>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="aspect-square bg-neko-paper rounded-lg flex flex-col items-center justify-center text-neko-brown/50 hover:bg-neko-paper/80 transition">
-                        <span class="text-2xl mb-2">🍞</span>
-                        <span class="text-xs font-bold">图1 卧姿</span>
-                    </div>
-                    <div class="aspect-square bg-neko-paper rounded-lg flex flex-col items-center justify-center text-neko-brown/50 hover:bg-neko-paper/80 transition">
-                        <span class="text-2xl mb-2">💤</span>
-                        <span class="text-xs font-bold">图2 睡姿</span>
-                    </div>
-                    <div class="aspect-square bg-neko-paper rounded-lg flex flex-col items-center justify-center text-neko-brown/50 hover:bg-neko-paper/80 transition">
-                        <span class="text-2xl mb-2">😺</span>
-                        <span class="text-xs font-bold">图3 主视图</span>
-                    </div>
-                    <div class="aspect-square bg-neko-paper rounded-lg flex flex-col items-center justify-center text-neko-brown/50 hover:bg-neko-paper/80 transition">
-                        <span class="text-2xl mb-2">🍑</span>
-                        <span class="text-xs font-bold">图5 后视图</span>
-                    </div>
-                </div>
-            </div>
+<!-- Image Gallery -->
+<div class="bg-white rounded-xl p-6 paper-shadow border border-neko-paper">
+    <h4 class="font-bold text-lg mb-4">[附录] 影像资料存档 (图1-图5)</h4>
 
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+        <!-- 图1 -->
+        <div class="aspect-square bg-neko-paper rounded-lg overflow-hidden">
+            <img src="./2.jpg"
+                 alt="图1 卧姿"
+                 class="w-full h-full object-cover hover:scale-105 transition">
+            <div class="text-xs font-bold text-center mt-1">图1 卧姿</div>
         </div>
+
+        <!-- 图2 -->
+        <div class="aspect-square bg-neko-paper rounded-lg overflow-hidden">
+            <img src="./3.jpg"
+                 alt="图2 睡姿"
+                 class="w-full h-full object-cover hover:scale-105 transition">
+            <div class="text-xs font-bold text-center mt-1">图2 睡姿</div>
+        </div>
+
+        <!-- 图3 -->
+        <div class="aspect-square bg-neko-paper rounded-lg overflow-hidden">
+            <img src="./4.jpg"
+                 alt="图3 主视图"
+                 class="w-full h-full object-cover hover:scale-105 transition">
+            <div class="text-xs font-bold text-center mt-1">图3 主视图</div>
+        </div>
+
+        <!-- 图4（如果你暂时没有，可以留占位） -->
+        <div class="aspect-square bg-neko-paper rounded-lg flex items-center justify-center text-neko-brown/50">
+            <span class="text-xs font-bold">图4（暂无）</span>
+        </div>
+
+    </div>
+</div>
+
 
         <!-- RIGHT COLUMN: CONTEST RULES (Based on PDF 2) -->
         <div class="lg:col-span-5 flex flex-col gap-6">
