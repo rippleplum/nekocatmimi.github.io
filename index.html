@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一届我家新猫咪命名大赛 | 官方页面</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Design Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neko-cream': '#fdfbf7',
+                        'neko-paper': '#f0e6d2',
+                        'neko-brown': '#5d4037',
+                        'neko-accent': '#e67e22',
+                        'neko-secondary': '#8d6e63',
+                    },
+                    fontFamily: {
+                        'serif': ['"Noto Serif SC"', 'serif'],
+                        'sans': ['"Noto Sans SC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fdfbf7;
+            color: #5d4037;
+        }
+        .paper-shadow {
+            box-shadow: 0 4px 6px -1px rgba(93, 64, 55, 0.1), 0 2px 4px -1px rgba(93, 64, 55, 0.06);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 300px;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0e6d2; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8d6e63; 
+            border-radius: 4px;
+        }
+    </style>
+
+    <!-- Chosen Palette: Warm Neutral/Academic (Cream, Brown, Soft Orange) -->
+    <!-- Application Structure Plan: 
+         1. Header: Official Announcement title + Netdisk Link.
+         2. Context Section (Left Col): "Research Object Analysis" (The Cat). Uses text from PDF 1 + Radar Chart for personality.
+         3. Contest Section (Right Col): "Protocol & Rules". Uses text from PDF 2 + Timeline.
+         4. Interaction: Submission Simulator (Mock input) + Prize Visualization.
+         Reasoning: Splits the 'Scientific' background from the 'Administrative' rules for clarity.
+    -->
+    <!-- Visualization & Content Choices:
+         - Radar Chart: To visualize the abstract "Appearance/Personality" traits mentioned (Innocent vs Plotting).
+         - Donut Chart: To visualize the "State Transition" (Alert vs Rotting).
+         - Text Blocks: Direct quotes from the "References" style in the source PDF.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="font-sans antialiased selection:bg-neko-accent selection:text-white pb-20">
+
+    <!-- Navbar / Header -->
+    <nav class="bg-neko-brown text-neko-cream sticky top-0 z-50 shadow-lg border-b-4 border-neko-accent">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="text-3xl">🐱</div>
+                <div>
+                    <h1 class="text-xl font-bold font-serif tracking-wide">第一届新成员命名大赛</h1>
+                    <p class="text-xs text-neko-paper opacity-80">The 1st Naming Contest for New Family Member</p>
+                </div>
+            </div>
+            
+            <!-- Netdisk Link Button -->
+            <div class="hidden md:block">
+                <div class="bg-neko-paper text-neko-brown px-4 py-2 rounded-lg text-sm font-bold shadow flex flex-col items-end">
+                    <span>📂 原始文件下载 (百度网盘)</span>
+                    <div class="flex gap-2 text-xs mt-1">
+                        <a href="https://pan.baidu.com/s/1ICnIF44xRPPEkFhBqCUcdA?pwd=neko" target="_blank" class="hover:text-neko-accent underline">点击跳转</a>
+                        <span class="text-neko-secondary">|</span>
+                        <span class="cursor-pointer hover:text-neko-accent" onclick="copyCode()">提取码: neko (点击复制)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Netdisk Link (Visible only on small screens) -->
+    <div class="md:hidden bg-neko-paper p-3 text-center border-b border-neko-brown/20">
+        <p class="text-sm font-bold">📂 原始文件下载</p>
+        <p class="text-xs mt-1">
+            <a href="https://pan.baidu.com/s/1ICnIF44xRPPEkFhBqCUcdA?pwd=neko" target="_blank" class="text-neko-accent underline">打开百度网盘</a> 
+            <span class="mx-2 text-gray-400">|</span>
+            <span class="cursor-pointer font-mono bg-white px-1 rounded border border-gray-300" onclick="copyCode()">neko</span>
+        </p>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- INTRO HERO -->
+        <div class="lg:col-span-12 text-center mb-4">
+            <span class="inline-block bg-neko-accent text-white px-3 py-1 rounded-full text-xs font-bold mb-2 tracking-widest uppercase">Official Notice</span>
+            <h2 class="text-3xl md:text-5xl font-serif font-bold text-neko-brown mb-4">关于我家新猫咪命名大赛的正式通知</h2>
+            <p class="text-neko-secondary max-w-2xl mx-auto text-lg leading-relaxed">
+                “为妥善解决我家新入住成员（猫咪，暂未命名）在日常生活中缺乏合法称呼的问题，现公开征集其姓名。”
+            </p>
+        </div>
+
+        <!-- LEFT COLUMN: RESEARCH OBJECT (Based on PDF 1) -->
+        <div class="lg:col-span-7 flex flex-col gap-6">
+            
+            <!-- Section Header -->
+            <div class="border-l-4 border-neko-accent pl-4">
+                <h3 class="text-2xl font-serif font-bold text-neko-brown">一、研究对象基本情况说明</h3>
+                <p class="text-sm text-neko-secondary">Reference: 猫咪基本情况说明.pdf</p>
+            </div>
+
+            <!-- Taxonomy Card -->
+            <div class="bg-white rounded-xl p-6 paper-shadow border border-neko-paper">
+                <h4 class="font-bold text-lg mb-3 flex items-center">
+                    <span class="mr-2">🔬</span> [1] 物种来源与分类学背景
+                </h4>
+                <div class="bg-neko-cream p-4 rounded-lg font-mono text-sm text-neko-brown mb-4">
+                    脊索动物门 (Chordata) > 哺乳纲 (Mammalia) > 食肉目 (Carnivora) > 猫科 (Felidae) > 家猫属 (Felis)
+                </div>
+                <p class="text-neko-secondary leading-relaxed">
+                    据观察，其行为表现符合典型家猫特征，包括但不限于：<span class="font-bold text-neko-brown">随机冲刺</span>、<span class="font-bold text-neko-brown">突然静止</span>、对塑料袋和纸箱表现出高度兴趣。
+                </p>
+            </div>
+
+            <!-- Appearance & Behavior Analysis (Charts) -->
+            <div class="bg-white rounded-xl p-6 paper-shadow border border-neko-paper">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Text Description -->
+                    <div>
+                        <h4 class="font-bold text-lg mb-3 flex items-center">
+                            <span class="mr-2">📝</span> [2] 个体外观与形态
+                        </h4>
+                        <p class="text-sm text-neko-secondary mb-4 leading-relaxed">
+                            该个体目前体型中等，外观呈现出<span class="bg-yellow-100 px-1 rounded">“看起来很乖但可能在憋坏”</span>的综合特征。面部表情在“无辜”与“我知道你在看我”之间动态切换。
+                        </p>
+                        <h4 class="font-bold text-lg mb-3 flex items-center mt-6">
+                            <span class="mr-2">🏃</span> [3] 行为学初步观察
+                        </h4>
+                        <p class="text-sm text-neko-secondary leading-relaxed">
+                            该猫在陌生环境中展现出有限但稳定的探索欲，能在短时间内完成从“警惕”到“摆烂”的状态转移。
+                        </p>
+                    </div>
+
+                    <!-- Charts Area -->
+                    <div class="flex flex-col gap-4">
+                        <!-- Radar Chart: Personality -->
+                        <div class="bg-neko-cream rounded-lg p-2 border border-neko-paper flex flex-col items-center">
+                            <h5 class="text-xs font-bold text-neko-secondary mb-2 uppercase tracking-wide">综合特征雷达图 (Data Viz)</h5>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="catRadarChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Placeholders (Mimicking Fig 1-5 in PDF) -->
+            <div class="bg-white rounded-xl p-6 paper-shadow border border-neko-paper">
+                <h4 class="font-bold text-lg mb-4">[附录] 影像资料存档 (图1-图5)</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="aspect-square bg-neko-paper rounded-lg flex flex-col items-center justify-center text-neko-brown/50 hover:bg-neko-paper/80 transition">
+                        <span class="text-2xl mb-2">🍞</span>
+                        <span class="text-xs font-bold">图1 卧姿</span>
+                    </div>
+                    <div class="aspect-square bg-neko-paper rounded-lg flex flex-col items-center justify-center text-neko-brown/50 hover:bg-neko-paper/80 transition">
+                        <span class="text-2xl mb-2">💤</span>
+                        <span class="text-xs font-bold">图2 睡姿</span>
+                    </div>
+                    <div class="aspect-square bg-neko-paper rounded-lg flex flex-col items-center justify-center text-neko-brown/50 hover:bg-neko-paper/80 transition">
+                        <span class="text-2xl mb-2">😺</span>
+                        <span class="text-xs font-bold">图3 主视图</span>
+                    </div>
+                    <div class="aspect-square bg-neko-paper rounded-lg flex flex-col items-center justify-center text-neko-brown/50 hover:bg-neko-paper/80 transition">
+                        <span class="text-2xl mb-2">🍑</span>
+                        <span class="text-xs font-bold">图5 后视图</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: CONTEST RULES (Based on PDF 2) -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
+
+            <!-- Section Header -->
+            <div class="border-l-4 border-neko-secondary pl-4">
+                <h3 class="text-2xl font-serif font-bold text-neko-brown">二、命名比赛执行案</h3>
+                <p class="text-sm text-neko-secondary">Reference: 猫咪命名比赛说明.pdf</p>
+            </div>
+
+            <!-- Timeline Widget -->
+            <div class="bg-white rounded-xl p-6 paper-shadow border border-neko-paper relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-red-50 text-red-500 text-xs px-2 py-1 font-bold rounded-bl-lg">URGENT</div>
+                <h4 class="font-bold text-lg mb-4">⏳ 赛程安排</h4>
+                <div class="relative pl-4 border-l-2 border-neko-paper space-y-6">
+                    <div class="relative">
+                        <div class="absolute -left-[21px] bg-neko-accent w-4 h-4 rounded-full border-2 border-white"></div>
+                        <p class="text-xs text-neko-secondary font-bold">NOW - FEB 2 (21:00)</p>
+                        <p class="font-bold text-neko-brown">公开征集阶段</p>
+                        <p class="text-xs text-gray-500">私信提交名字 (中文/英文/日语)</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-[21px] bg-neko-paper w-4 h-4 rounded-full border-2 border-white"></div>
+                        <p class="text-xs text-neko-secondary font-bold">FEB 3</p>
+                        <p class="font-bold text-neko-brown">决赛投票阶段</p>
+                        <p class="text-xs text-gray-500">朋友圈公开投票，选出最终“官方姓名”</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Judging Criteria -->
+            <div class="bg-neko-brown text-neko-cream rounded-xl p-6 shadow-lg">
+                <h4 class="font-bold text-lg mb-4 border-b border-neko-cream/20 pb-2">⚖️ 评选标准 (The "Standard")</h4>
+                <p class="text-sm opacity-90 mb-4">本人将对所有投稿进行统一评审，评选保证主观、公平、平开、公正。</p>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white/10 p-2 rounded text-center">
+                        <div class="text-xl">🔥</div>
+                        <div class="text-xs font-bold mt-1">夯 (Solid)</div>
+                    </div>
+                    <div class="bg-white/10 p-2 rounded text-center">
+                        <div class="text-xl">👑</div>
+                        <div class="text-xs font-bold mt-1">顶级 (Top-tier)</div>
+                    </div>
+                    <div class="bg-white/10 p-2 rounded text-center">
+                        <div class="text-xl">🤵</div>
+                        <div class="text-xs font-bold mt-1">人上人 (Elite)</div>
+                    </div>
+                    <div class="bg-white/10 p-2 rounded text-center">
+                        <div class="text-xl">🤖</div>
+                        <div class="text-xs font-bold mt-1">NPC感</div>
+                    </div>
+                </div>
+                <p class="text-xs text-center mt-4 opacity-60 italic">注：解释权、最终决定权及临时变卦权均归本人所有。</p>
+            </div>
+
+            <!-- Prizes -->
+            <div class="bg-white rounded-xl p-6 paper-shadow border border-neko-paper">
+                <h4 class="font-bold text-lg mb-4">🏆 奖项设置</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-start gap-3 p-3 bg-yellow-50 rounded-lg border border-yellow-100">
+                        <span class="text-2xl">🥇</span>
+                        <div>
+                            <span class="block font-bold text-neko-brown">冠军 (最终采用)</span>
+                            <span class="text-sm text-neko-secondary">自选奶茶一杯 + 猫咪明信片一张</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="text-2xl">🎖️</span>
+                        <div>
+                            <span class="block font-bold text-neko-brown">参与奖 (前30名)</span>
+                            <span class="text-sm text-neko-secondary">本人主观认定为“夯”的投稿者，获明信片一张</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- FULL WIDTH: MOCK SUBMISSION FORM -->
+        <div class="lg:col-span-12 mt-4">
+            <div class="bg-white rounded-xl p-8 paper-shadow border-t-4 border-neko-accent text-center relative overflow-hidden">
+                
+                <!-- Decoration -->
+                <div class="absolute top-[-10px] right-[-10px] text-9xl opacity-5 pointer-events-none">😼</div>
+
+                <h3 class="text-2xl font-serif font-bold text-neko-brown mb-2">立即投稿 (Submission)</h3>
+                <p class="text-sm text-neko-secondary mb-6">每人限提交 3 个名字。多提交部分将被视为情绪激动，不予采纳。</p>
+                
+                <div class="max-w-md mx-auto space-y-4">
+                    <div class="relative">
+                        <input type="text" id="name1" placeholder="方案 A (例如: 咪咪)" class="w-full bg-neko-cream border border-neko-paper rounded-lg px-4 py-3 focus:outline-none focus:border-neko-accent transition">
+                    </div>
+                    <div class="relative">
+                        <input type="text" id="name2" placeholder="方案 B (例如: 旺财)" class="w-full bg-neko-cream border border-neko-paper rounded-lg px-4 py-3 focus:outline-none focus:border-neko-accent transition">
+                    </div>
+                    <div class="relative">
+                        <input type="text" id="name3" placeholder="方案 C (例如: Godzilla)" class="w-full bg-neko-cream border border-neko-paper rounded-lg px-4 py-3 focus:outline-none focus:border-neko-accent transition">
+                    </div>
+                    
+                    <button onclick="submitNames()" class="w-full bg-neko-accent hover:bg-orange-600 text-white font-bold py-3 rounded-lg shadow-md transition transform active:scale-95">
+                        提交名字 / Submit
+                    </button>
+                    <p id="submit-msg" class="text-xs text-neko-accent font-bold h-4"></p>
+                </div>
+            </div>
+            
+            <p class="text-center text-neko-secondary/50 text-xs mt-8 pb-4">
+                © 2026 第一届猫咪命名大赛组委会 | 解释权归本人所有
+            </p>
+        </div>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. Copy Code Functionality ---
+        function copyCode() {
+            const code = 'neko';
+            navigator.clipboard.writeText(code).then(() => {
+                alert('提取码 "neko" 已复制到剪贴板！\nExtraction code copied!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // --- 2. Chart.js Initialization ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // Data extraction from "猫咪基本情况说明.pdf" (Visualized)
+            // Traits: "Looks innocent but plotting", "Alert to Rotting", "Exploration"
+            
+            const ctxRadar = document.getElementById('catRadarChart').getContext('2d');
+            
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['无辜感 (Innocence)', '憋坏指数 (Scheming)', '环境适应 (Adaptability)', '纸箱兴趣 (Box Love)', '摆烂速度 (Rotting Speed)'],
+                    datasets: [{
+                        label: '新猫咪属性模型',
+                        data: [90, 85, 70, 95, 88], // Hypothetical data based on text descriptions
+                        backgroundColor: 'rgba(230, 126, 34, 0.2)',
+                        borderColor: 'rgba(230, 126, 34, 1)',
+                        pointBackgroundColor: '#5d4037',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0,0,0,0.1)' },
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            pointLabels: {
+                                font: { size: 10, family: "'Noto Sans SC', sans-serif" },
+                                color: '#5d4037'
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: { display: false } // Hide numbers for cleaner look
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '/100';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // --- 3. Mock Submission Logic ---
+        function submitNames() {
+            const n1 = document.getElementById('name1').value.trim();
+            const n2 = document.getElementById('name2').value.trim();
+            const n3 = document.getElementById('name3').value.trim();
+            const msg = document.getElementById('submit-msg');
+
+            if (!n1 && !n2 && !n3) {
+                msg.textContent = "⚠️ 请至少输入一个名字 / Please enter at least one name.";
+                msg.className = "text-xs text-red-500 font-bold mt-2";
+                return;
+            }
+
+            // Fun random response generator simulating the "Subjective Review"
+            const responses = [
+                "已收到！感觉很夯！(Received! Feels Solid!)",
+                "已收到！这名字有点NPC感... (Received! A bit NPC-like...)",
+                "已提交。评委正在锐评中... (Submitted. Under review...)",
+                "这就去朋友圈拉票！ (Going to get votes!)"
+            ];
+            
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            
+            msg.textContent = "✅ " + randomResponse;
+            msg.className = "text-xs text-green-600 font-bold mt-2";
+
+            // Clear inputs after 2 seconds
+            setTimeout(() => {
+                document.getElementById('name1').value = '';
+                document.getElementById('name2').value = '';
+                document.getElementById('name3').value = '';
+                msg.textContent = '';
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
